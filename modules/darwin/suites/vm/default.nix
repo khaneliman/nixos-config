@@ -1,0 +1,30 @@
+{ options
+, config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+with lib.internal; let
+  cfg = config.khanelinix.suites.vm;
+in
+{
+  options.khanelinix.suites.vm = with types; {
+    enable =
+      mkBoolOpt false
+        "Whether or not to enable common vm configuration.";
+  };
+
+  config = mkIf cfg.enable {
+    khanelinix = {
+      apps = { };
+
+      cli-apps = { };
+
+      services = { };
+
+      tools = { };
+
+    };
+  };
+}
